@@ -7,7 +7,9 @@
     <script src="test-module.js"></script>
   </head>
   <body>
-   <div rk-github ng-transclude>
+    <div github gh-user="rafkhan" ng-transclude>
+      <h1>Showing repositories for: {{gh_user}}</h1>
+
       <div ng-repeat="repo in ghrepos">
         {{ repo.name }} - {{ repo.language }}
       </div>

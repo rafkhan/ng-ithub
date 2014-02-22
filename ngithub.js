@@ -5,12 +5,16 @@ var ngithub = function($http) {
     transclude: true,
 
     link: function(scope, iElement, iAttrs) {
-      $http.get(API_BASE + '/users/rafkhan/repos')
+
+      var gh_user = iAttrs.ghUser;
+      scope.gh_user = gh_user;
+
+      $http.get(API_BASE + '/users/' + scope.gh_user + '/repos')
       .success(function(data, status, headers, config) {
         scope.ghrepos = data;
       })
       .error(function(data, status, headers, config) {
-        
+        console.log(data, status, headers, config);
       });
     }
   };

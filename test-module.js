@@ -1,2 +1,2 @@
-angular.module("testapp", []).directive('rkGithub', ngithub);
+angular.module("testapp", []).directive('github', ngithub);
 
