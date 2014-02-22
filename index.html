@@ -3,25 +3,35 @@
 <html ng-app="testapp">
   <head>
     <script src='https://ajax.googleapis.com/ajax/libs/angularjs/1.2.13/angular.min.js'></script>
+
     <script src='ngithub.js'></script>
-    <script src="test-module.js"></script>
+
+    <script type="text/javascript">
+      angular.module("testapp", [])
+      .directive('github', ngithub({
+              sort: "asc",
+              type: "all",
+              direction: "asc",
+              access_token: "540b89167bcfc693567cfe9d177b66561db449f0"
+            }));
+    </script>
+
   </head>
   <body>
 
-    <input type="text" ng-model="userinput"/>
-    {{userinput}}
+    <github gh-user="rafkhan" ng-transclude> 
+      <div ng-show="gh_done">
+        <div class="success-content" ng-show="gh_success">
+          <h1>Showing repositories for: {{gh_user}}</h1>
 
-    <github gh-user="{{userinput}}" ng-transclude> 
-      <div class="success-content" ng-show="gh_success">
-        <h1>Showing repositories for: {{gh_user}}</h1>
-
-        <div ng-repeat="repo in gh_repos">
-          {{ repo.name }} - {{ repo.language }}
+          <div ng-repeat="repo in gh_repos">
+            {{ repo.name }} - {{ repo.language }}
+          </div>
         </div>
-      </div>
 
-      <div class="fail-message" ng-hide="gh_success">
-        Could not get
+        <div class="fail-message" ng-hide="gh_success">
+          Could not get
+        </div>
       </div>
    </github>
 

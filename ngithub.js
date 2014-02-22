@@ -1,26 +1,43 @@
-var ngithub = function($http) {
-  var API_BASE = 'https://api.github.com';
+var ngithub = function(params) {
 
-  return {
-    transclude: true,
-    restrict: "EA",
+  // This function gets passed to the directive
+  var directive_func = function($http) {
+    var API_BASE = 'https://api.github.com';
 
-    link: function(scope, iElement, iAttrs, ctrl, transclude) {
-      scope.gh_success = true;
-    
-      scope.$watch('userinput', function() {
+    return {
+      transclude: true,
+      restrict: "EA",
+
+      link: function(scope, iElement, iAttrs) {
+        scope.gh_done = false;
+
         var gh_user = iAttrs.ghUser;
         scope.gh_user = gh_user;
 
-        $http.get(API_BASE + '/users/' + scope.gh_user + '/repos?access_token=540b89167bcfc693567cfe9d177b66561db449f0')
+        var query = API_BASE + '/users/' + scope.gh_user+ '/repos'
+                  + '?sort=' + params.sort
+                  + '&type=' + params.type
+                  + '&direction' + params.direction
+                  + '&access_token=' + params.access_token;
+
+        console.log(query);
+
+        $http.get(query)
         .success(function(data, status, headers, config) {
           scope.gh_repos = data;
           scope.gh_success = true;
+          scope.gh_done = true;
         })
         .error(function(data, status, headers, config) {
           scope.gh_success = false;
+          scope.gh_done = true;
         });
-      });
-    }
+      }
+    };
   };
+
+  return directive_func;
 };
+
+
+//540b89167bcfc693567cfe9d177b66561db449f0
