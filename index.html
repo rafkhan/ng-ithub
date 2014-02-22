@@ -26,7 +26,7 @@
           <h1>Showing repositories for: {{gh_user}}</h1>
 
           <div ng-repeat="repo in gh_repos">
-            {{ repo.name }} - {{ repo.language }}
+            <a href="{{repo.html_url}}">{{ repo.name }} - {{ repo.language }}</a>
           </div>
         </div>
 
