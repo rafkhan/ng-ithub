@@ -11,7 +11,7 @@
     <input type="text" ng-model="userinput"/>
     {{userinput}}
 
-    <github gh-user="rafkhan" ng-transclude> 
+    <github gh-user="{{userinput}}" ng-transclude> 
       <div class="success-content" ng-show="gh_success">
         <h1>Showing repositories for: {{gh_user}}</h1>
 
@@ -20,7 +20,6 @@
         </div>
       </div>
 
-      <!>
       <div class="fail-message" ng-hide="gh_success">
         Could not get
       </div>
