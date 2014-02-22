@@ -7,12 +7,24 @@
     <script src="test-module.js"></script>
   </head>
   <body>
-    <div github gh-user="rafkhan" ng-transclude>
-      <h1>Showing repositories for: {{gh_user}}</h1>
 
-      <div ng-repeat="repo in ghrepos">
-        {{ repo.name }} - {{ repo.language }}
+    <input type="text" ng-model="userinput"/>
+    {{userinput}}
+
+    <github gh-user="rafkhan" ng-transclude> 
+      <div class="success-content" ng-show="gh_success">
+        <h1>Showing repositories for: {{gh_user}}</h1>
+
+        <div ng-repeat="repo in gh_repos">
+          {{ repo.name }} - {{ repo.language }}
+        </div>
       </div>
-   </div>
+
+      <!>
+      <div class="fail-message" ng-hide="gh_success">
+        Could not get
+      </div>
+   </github>
+
   </body>
 </html>
